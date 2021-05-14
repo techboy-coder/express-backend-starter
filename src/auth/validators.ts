@@ -6,7 +6,7 @@ const Joi = require("joi")
 
 export const user_in_register_validator = (data: any, next: NextFunction) => {
   const user_in_register = Joi.object({
-    name: Joi.string().alphanum().max(255).required(),
+    name: Joi.string().max(255).required(),
     email: Joi.string().email().max(255).required(),
     password: Joi.string().min(3).max(15).required(),
     password_confirmation: Joi.string().required().valid(Joi.ref('password'))

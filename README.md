@@ -22,15 +22,70 @@
 #### Clone Repo
 
 ```bash
-git clone "https://github.com/techboy-coder/express-backend-starter"
+git clone "https://github.com/techboy-coder/express-backend-starter" && cd express-backend-starter && yarn
 ```
 
 #### Additional Commands (in package.json)
 
+*<u>Don’t forget to install modules first</u>*
+
 - `dev`  -  Running a dev server (ts-node-dev)
 - `build`  -  Export TypeScript to JavaScript + bundle JS into 1 file.
-- `start`  -  Run build + `npm "./production/bundle.js"` (Starts Server)
+- `start`  -  Run build + `node "./production/bundle.js"` (Starts Server)
 - `dev:migrate`  -  Make migrations from `schema.prisma` file.
+
+## API usage
+API uses Express-Sessions. This means it will generate a session cookie.
+### Register User
+
+```json
+POST http://localhost:4000/v1/user/register
+Json Body:
+{
+    "name": "Bob Smith",
+    "email": "bob@email.com",
+    "password": "secret",
+    "password_confirmation": "secret"
+}
+```
+
+### Register User
+
+```json
+POST http://localhost:4000/v1/user/register
+Json Body:
+{
+    "name": "Bob Smith",
+    "email": "bob@email.com",
+    "password": "secret",
+    "password_confirmation": "secret"
+}
+```
+
+### Login User
+
+```json
+POST http://localhost:4000/v1/user/login
+Json Body:
+{
+    "email": "bob@email.com",
+    "password": "secret"
+}
+```
+
+### Get User Info
+
+```json
+GET http://localhost:4000/v1/user/
+```
+
+### Example Protected Route
+
+```json
+GET http://localhost:4000/v1/user/protected
+```
+
+
 
 ## File tree
 
