@@ -22,7 +22,7 @@
 #### Clone Repo
 
 ```bash
-git clone ...
+git clone "https://github.com/techboy-coder/express-backend-starter"
 ```
 
 #### Additional Commands (in package.json)
