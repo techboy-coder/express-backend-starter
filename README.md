@@ -50,19 +50,6 @@ Json Body:
 }
 ```
 
-### Register User
-
-```json
-POST http://localhost:4000/v1/user/register
-Json Body:
-{
-    "name": "Bob Smith",
-    "email": "bob@email.com",
-    "password": "secret",
-    "password_confirmation": "secret"
-}
-```
-
 ### Login User
 
 ```json
