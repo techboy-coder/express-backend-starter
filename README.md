@@ -67,6 +67,14 @@ Json Body:
 GET http://localhost:4000/v1/user/
 ```
 
+### Delete User
+
+*User gets recognized thanks to session.*
+
+```json
+DELETE http://localhost:4000/v1/user/
+```
+
 ### Example Protected Route
 
 ```json
