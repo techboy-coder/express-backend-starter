@@ -14,6 +14,7 @@
 - SQLite (Can be switched quickly)
 - Prisma ORM
 - Passport JS (Local-Auth setup)
+- Webpack
 
 ## Get Started
 
@@ -85,8 +86,6 @@ GET http://localhost:4000/v1/user/
 GET http://localhost:4000/v1/user/protected
 ```
 
-
-
 ## File tree
 
 ```
@@ -125,3 +124,4 @@ GET http://localhost:4000/v1/user/protected
 
 ---
 
+M​a​de​ ​w​it​h​ :heart: by [techboy-coder](https://github.com/techboy-coder/) - Express Backend Starter
