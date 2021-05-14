@@ -2,7 +2,6 @@ import { Prisma } from ".prisma/client";
 import { PrismaClient } from ".prisma/client";
 import { compare, hash } from "bcrypt";
 import { NextFunction, Request, Response } from "express";
-import { dto_user_in_register, dto_user_out_register } from "./interfaces";
 import { user_in_login_validator, user_in_register_validator, user_out_register_validator } from "./validators";
 const prisma = new PrismaClient()
 
@@ -11,7 +10,7 @@ const prisma = new PrismaClient()
 export async function create_user(req: Request, res: Response, next: NextFunction) {
   // Valid Input
 
-  const { name, email, password, password_confirmation }: dto_user_in_register = await user_in_register_validator(req.body, next)
+  const { name, email, password, password_confirmation } = await user_in_register_validator(req.body, next)
 
   // Hash Password
   const hashed_password = await hash(password, 10)
@@ -25,7 +24,7 @@ export async function create_user(req: Request, res: Response, next: NextFunctio
         password: hashed_password
       }
     })
-    const output: dto_user_out_register = await user_out_register_validator(user_created, next)
+    const output = await user_out_register_validator(user_created, next)
     return res.send(output)
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -40,18 +39,26 @@ export async function create_user(req: Request, res: Response, next: NextFunctio
 }
 // Login user
 export async function login_user(req: Request, res: Response, next: NextFunction) {
-  const { email, password } = await user_in_login_validator(req.body, next)
-  const user = await prisma.user.findFirst({
-    where: {
-      email
-    }
-  })
-  if (!user) {
-    return next(Error("Wrong Credentials"))
+  res.redirect("protected")
+}
+
+export async function delete_user(req: Request, res: Response, next: NextFunction) {
+  // Valid Input
+  const user: any = req.user
+  console.log("%j", req.user);
+
+  try {
+    // Make User
+    const user_deleted = await prisma.user.delete({
+      where: {
+        id: user.id
+      }
+    })
+    console.log("%j", user_deleted);
+    return res.send("Deleted")
+  } catch (error) {
+    next(error)
   }
-  const valid = await compare(password, user.password)
-  if (!valid) {
-    return next(Error("Wrong Credentials"))
-  }
-  res.send("Successful login")
+  res.send("Deleted")
+  next()
 }

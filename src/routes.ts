@@ -2,13 +2,15 @@ const bodyParser = require('body-parser');
 const chalk = require("chalk")
 import { Request, Response, Router } from "express"
 import { TokenIndexer } from "morgan";
+import { mongodb_uri, session_secret } from "./secrets"
 const router: Router = require("express").Router()
 var morgan = require('morgan')
 import cors from "cors"
 import session from "express-session";
 import passport from "passport";
+import { store } from "./session";
 
-
+// Logger
 export const morganMiddleware = morgan(function (tokens: TokenIndexer, req: Request, res: Response) {
   return [
     '\n',
@@ -26,10 +28,16 @@ export const morganMiddleware = morgan(function (tokens: TokenIndexer, req: Requ
 
 router.use(morganMiddleware);
 router.use(cors({ origin: "http://localhost:3000", credentials: true }))
+
+// Sessions Config
 router.use(session({
-  secret: "asupersecretcode",
+  secret: session_secret,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  },
+  store: store
 }))
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -37,12 +45,16 @@ router.use(passport.initialize())
 router.use(passport.session())
 
 // Routes
+
+require("./auth/config/passport")
+
+
 router.get("/", (req, res) => {
-  res.send("Api is working")
+  res.send("This is api version v1.0.0")
 })
 
-// - Auth 
-router.use("/auth", require("./auth/router"))
+// Auth 
+router.use("/user", require("./auth/controller"))
 
 
 

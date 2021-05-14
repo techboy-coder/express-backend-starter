@@ -7,7 +7,11 @@ var compression = require('compression');
 
 app.use(compression());
 //All Routes
-app.use("/api", routes)
+
+app.get("/", (req, res) => {
+  res.send("Api running")
+})
+app.use("/v1", routes)
 
 
 interface Error {

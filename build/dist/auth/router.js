@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var services_1 = require("./user/services");
+var services_1 = require(".//services");
 var router = require("express").Router();
 router.get("/", function (req, res) {
     res.send("Auth Routes");
