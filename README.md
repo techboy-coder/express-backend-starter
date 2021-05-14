@@ -4,7 +4,7 @@
 
 ## Overview
 
-** This is a backend starter using Express, Prisma and Typescript. Simply clone this project, and add further functionality and modules. ** 
+**This is a backend starter using Express, Prisma and Typescript. Simply clone this project, and add further functionality and modules.** 
 
 ### Techstack
 
