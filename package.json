@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "npx tsc -p . && npx webpack",
-    "start": "npm run build & node \".\\production\\bundle.js\""
+    "start": "npm run build & node \".\\production\\bundle.js\"",
+    "dev:migrate": "npx prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "2.22.1",
