@@ -84,7 +84,7 @@ GET http://localhost:4000/v1/user/protected
 ## File tree
 
 ```
-📦backend-fastapi
+📦express-backend-starter
  ┣ 📂.git
  ┣ 📂prisma
  ┃ ┣ 📜dev.db
